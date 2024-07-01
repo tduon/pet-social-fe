@@ -1,31 +1,37 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import Navbar from "@/components/layouts/Navbar.vue"
 </script>
 
 <template>
-  <div>
+  <div class="app">
     <div class="navbar">
-      <RouterLink class="logo" to="/">pet social</RouterLink> | 
-
-      <div class="navbar-action">
-        <RouterLink to="/login">Login</RouterLink> |
-        <RouterLink to="/register">Register</RouterLink>
-      </div>
+      <Navbar />
     </div>
     <!-- phần thay đổi của từng trang -->
-    <RouterView />
+    <div class="page-container">
+      <RouterView />
+    </div>
   </div>
 </template>
 
 <style scoped>
-.navbar {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid black;
-  background: rgb(158, 178, 128);
+.app {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
-.navbar-action {
-  margin-left: auto;
+.navbar {
+  width: 100%;
+  height: 72px;
+  position: absolute;
+  top: 0px;
+}
+.page-container {
+  width: 100%;
+  height: calc(100% - 72px);
+  position: absolute;
+  bottom: 0px;
 }
 </style>

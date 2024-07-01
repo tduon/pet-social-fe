@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { api } from "@/modules/api" 
 
 const router = useRouter();
 const dataRegister = ref({
@@ -32,25 +33,33 @@ const register = async () => {
 </script>
 
 <template>
-    <div>
-        <h1>register</h1>
+    <div class="page">
+        <form class="form" @submit.prevent="register">
+            <h2>register</h2>
 
-        <div>
             <label>Email</label>
             <input type="text" v-model="dataRegister.email">
-        </div>
-        <div>
+            <div class="error"></div>
+
             <label>Password</label>
             <input type="password" v-model="dataRegister.password">
-        </div>
-        <div>
+            <div class="error"></div>
+
             <label>Confirm Password</label>
             <input type="password" v-model="dataRegister.confirm_password">
-        </div>
-        <button @click="register">Register</button>
+            <div class="error"></div>
+
+            <button type="submit">Register</button>
+        </form>
     </div>
 </template>
 
 <style scoped>
-
+@import url("@/assets/form.css");
+.page {
+    padding-top: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 </style>
