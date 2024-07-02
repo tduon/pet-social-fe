@@ -1,14 +1,21 @@
 <script setup>
-
+import { auth_user, log_out } from '@/stores/auth';
 </script>
 
 <template>
     <div class="navbar">
-        <RouterLink class="logo" to="/">pet social</RouterLink>
+        <RouterLink class="logo" to="/">pet social</RouterLink>-
+        <RouterLink class="posts" to="/posts">Posts</RouterLink>
 
         <div class="navbar-action">
-            <RouterLink to="/login">Login</RouterLink> |
-            <RouterLink to="/register">Register</RouterLink>
+            <span v-if="auth_user">
+              <span>{{ auth_user.email }}</span>
+              <button @click="log_out">logout</button>
+            </span>
+            <span v-else>
+              <RouterLink to="/login">Login</RouterLink> |
+              <RouterLink to="/register">Register</RouterLink>
+            </span>
         </div>
     </div>
 </template>

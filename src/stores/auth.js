@@ -1,26 +1,20 @@
 import { ref } from "vue";
+import { api } from "@/modules/api";
 
 export const token = ref("");
 
+// lưu thông tin user để phân biệt đã đăng nhập hay chưa 
+export const auth_user = ref(null);
+
 export const save_token_local = (tk) => {
-    token.value = tk;
+    token.value = "Bearer " + tk;
     localStorage.setItem("TOKEN", token.value);
 }
 
 export const get_auth_info = async() => {
     try {
-        await fetch("http://localhost:8000/api/auth/info", {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": token.value
-            },
-        }).then(async res => {
-            const data = await res.json();
-            
-            save_token_local(data.token);
-        })
+        const data = await api("GET", "/auth/info");
+        auth_user.value = data;
     } catch (error) {
         console.log(err);
     }
@@ -29,14 +23,23 @@ export const get_auth_info = async() => {
 export const load_token_local = () => {
     const tokenLocal = localStorage.getItem("TOKEN");
     if(tokenLocal){
-        token.value = "Bearer" + tokenLocal;
+        token.value = tokenLocal;
     }
 }
 
 export const innit_auth = async () => {
+    //khi gọi innit_auth sẽ lấy token được lưu trong localStorage
     load_token_local();
 
     if(token.value){
-        await load_token_local();
+        //gọi đến backend kiểm tra token trả về có đúng không
+        await get_auth_info();
     }
+}
+
+export const log_out = () => {
+    token.value = null;
+    auth_user.value = null;
+
+    localStorage.clear();
 }

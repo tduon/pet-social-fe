@@ -18,12 +18,13 @@ const register = async () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(dataRegister.value),
         }).then(async res => {
             const data = await res.json()
 
-            alert("Register success")
-            router.push("/login");
+            if(data) {
+                alert("Register success")
+                router.push("/login");
+            }
         })
     } catch (error) {
         console.log(error)

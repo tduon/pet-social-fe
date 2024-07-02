@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { api } from "@/modules/api" ;
-import { save_token_local } from "@/stores/auth";
+import { save_token_local, get_auth_info } from "@/stores/auth";
 // tạo dữ liệu để lưu
 const dataLogin = ref({
     email: '',
@@ -10,18 +10,10 @@ const dataLogin = ref({
 
 const login = async () => {
     try {
-        await fetch("http://localhost:8000/api/auth/login", {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataLogin.value),
-        }).then(async res => {
-            const data = await res.json();
-            
-            save_token_local(data.token);
-        })
+        const data = await api("POST", "/auth/login", dataLogin.value);
+        console.log(data);
+        save_token_local(data.token);
+        await get_auth_info();
     } catch (error) {
         console.log(error)
     }
