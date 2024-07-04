@@ -31,7 +31,7 @@ export default class {
         // theo dõi biến authUser thay đổi
         watch(() => auth_user.value, () => {
             if(auth_user.value) {
-                this.#router.push("/");
+                //this.#router.push("/");
             }else {
                 this.#router.push("/login");
             }

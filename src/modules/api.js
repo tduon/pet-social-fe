@@ -19,10 +19,13 @@ export const api = async (method, url, data) => {
             body: body,
         }).then(async res => {
             const data = await res.json();
-
-            return data;
+            if(res.ok){
+                return data;
+            }else {
+                throw data;
+            }
         })
     } catch (error) {
-        console.log(err);
+        throw error.error
     }
 }

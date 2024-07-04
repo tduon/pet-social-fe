@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import { api } from "@/modules/api" ;
 import { save_token_local, get_auth_info } from "@/stores/auth";
+import { auth_login_api } from "@/services/auth";
 // tạo dữ liệu để lưu
 const dataLogin = ref({
     email: '',
@@ -10,12 +10,11 @@ const dataLogin = ref({
 
 const login = async () => {
     try {
-        const data = await api("POST", "/auth/login", dataLogin.value);
-        console.log(data);
+        const data = await auth_login_api(dataLogin.value);
         save_token_local(data.token);
         await get_auth_info();
     } catch (error) {
-        console.log(error)
+        console.log('on login error', error);
     }
 }
 
@@ -44,7 +43,7 @@ const login = async () => {
 </template>
 
 <style scoped>
-@import url("@/assets/form.css");
+/* @import url("@/assets/form.css"); */
 .page {
     padding-top: 42px;
     display: flex;

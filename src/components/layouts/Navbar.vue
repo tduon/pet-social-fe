@@ -11,6 +11,7 @@ import { auth_user, log_out } from '@/stores/auth';
             <span v-if="auth_user">
               <span>{{ auth_user.email }}</span>
               <button @click="log_out">logout</button>
+              <RouterLink to="/profile/update">update Profile</RouterLink>
             </span>
             <span v-else>
               <RouterLink to="/login">Login</RouterLink> |
