@@ -15,8 +15,11 @@ export default class {
         this.#router.beforeEach((to, from) => {
             const path = to.path;
 
+            console.log(path)
+            console.log(auth_user.value)
             if(!auth_user.value) {
-                if(path == "/about") {
+                if(path == "/about" || path == "/post") 
+                {
                     this.#router.push("/login");
                 }
             } else {
@@ -33,7 +36,7 @@ export default class {
             if(auth_user.value) {
                 //this.#router.push("/");
             }else {
-                this.#router.push("/login");
+                //this.#router.push("/login");
             }
         })
     }

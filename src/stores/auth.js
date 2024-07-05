@@ -14,7 +14,7 @@ export const isCreatedProfile = computed(() => {
     if(!isLoggedIn.value){
         return false
     }else {
-        if(auth_user.value.profiled_id){
+        if(auth_user.value.profile_id){
             return true
         }
     }
@@ -51,8 +51,8 @@ export const load_token_local = () => {
     }
 }
 
-export const innit_auth = async () => {
-    //khi gọi innit_auth sẽ lấy token được lưu trong localStorage
+export const init_auth = async () => {
+    //khi gọi init_auth sẽ lấy token được lưu trong localStorage
     load_token_local();
 
     if(token.value){

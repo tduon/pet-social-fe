@@ -1,5 +1,6 @@
 <script setup>
 import { auth_user, log_out } from '@/stores/auth';
+import NavbarDropdown from "@/components/layouts/NavbarDropdown.vue";
 </script>
 
 <template>
@@ -8,15 +9,7 @@ import { auth_user, log_out } from '@/stores/auth';
         <RouterLink class="posts" to="/posts">Posts</RouterLink>
 
         <div class="navbar-action">
-            <span v-if="auth_user">
-              <span>{{ auth_user.email }}</span>
-              <button @click="log_out">logout</button>
-              <RouterLink to="/profile/update">update Profile</RouterLink>
-            </span>
-            <span v-else>
-              <RouterLink to="/login">Login</RouterLink> |
-              <RouterLink to="/register">Register</RouterLink>
-            </span>
+            <NavbarDropdown />
         </div>
     </div>
 </template>

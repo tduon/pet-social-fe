@@ -49,8 +49,8 @@ const updateProfile = async () => {
 <template>
     <div class="page">
         <form class="form" @submit.prevent="updateProfile">
-            <h1 v-if="isCreatedProfile"> update profile </h1>
-            <h1 v-else>Created Profile</h1>
+            <h1 v-if="isCreatedProfile">Update profile</h1>
+            <h1 v-else>Create profile</h1>
 
             <label>Name</label>
             <input type="text" v-model="dataProfile.name">
