@@ -24,7 +24,7 @@ const closeDropdown = () => {
             <div class="overlay" @click="closeDropdown"></div>
             <div class="popup" @click="closeDropdown">
                 <span class="popup-tab">{{ auth_user.email }}</span>
-                <RouterLink v-if="!isCreatedProfile" class="popup-tab" to="/profile">Create Profile</RouterLink>
+                <RouterLink v-if="!isCreatedProfile" class="popup-tab" to="/profile/update">Create Profile</RouterLink>
                 <RouterLink v-else class="popup-tab" :to="'/profile/' + auth_user.profile_id">My Profile</RouterLink>
                 <span class="popup-tab" @click="log_out">logout</span>
             </div>

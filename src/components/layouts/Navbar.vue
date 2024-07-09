@@ -1,5 +1,4 @@
 <script setup>
-import { auth_user, log_out } from '@/stores/auth';
 import NavbarDropdown from "@/components/layouts/NavbarDropdown.vue";
 </script>
 
