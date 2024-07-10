@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onBeforeMount } from 'vue';
+import { ref, computed, onBeforeMount, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { profile_get_api, profile_update_api } from '@/services/profile';
 import { auth_user } from '@/stores/auth';
@@ -8,7 +8,11 @@ const route = useRoute();
 const router = useRouter();
 
 const idProfile = computed(() => {
-    return route.params.id
+    return route.params.idUser
+})
+
+watch(() => idProfile.value,async () => {
+    await getProfile()
 })
 
 const profile = ref(null);

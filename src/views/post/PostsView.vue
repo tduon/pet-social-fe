@@ -33,8 +33,10 @@ const createNewPost = (post) => {
             <h1>Posts</h1>
             <button class="post-create-btn" @click="openPopupCreate">Create Post</button>
         </div>
-        <div v-for="post of posts.value">
-            <h2>{{ post.title }}</h2>
+        <div v-for="post of posts">
+            <RouterLink :to="'/posts/' + post.id">
+                <h2>{{ post.title }}</h2>
+            </RouterLink>
             <div>
                 {{ post.content }}
             </div>

@@ -18,3 +18,21 @@ export const post_list_api = async () => {
         throw error;
     }
 }
+
+export const post_detail_api = async (id) => {
+    try {
+        return await api("GET", `/posts/${id}` );
+    } catch (error) {
+        process_error(error);
+        throw error;
+    }
+}
+
+export const post_like_api = async (idPost) => {
+    try {
+        return await api("POST", `/posts/${idPost}/like` );
+    } catch (error) {
+        process_error(error);
+        throw error;
+    }
+}

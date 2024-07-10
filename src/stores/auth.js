@@ -20,6 +20,10 @@ export const isCreatedProfile = computed(() => {
     }
     return false
 })
+
+export const myProfileId = computed(() => {
+    return auth_user.value.profile_id
+})
 /* 
 {
     "id": 4,

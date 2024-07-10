@@ -53,6 +53,7 @@ const createPost = async () => {
     bottom: 0;
     background-color: #00000080;
     z-index: 4;
+    display: flex;
     justify-content: center;
     align-items: center;
     animation: fadeIn-7ce9fa01 .5s ease;

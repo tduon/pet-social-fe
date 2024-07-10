@@ -2,7 +2,7 @@ import { init_auth } from "./auth";
 
 // chua dang nhap
 export const init_store = async () => {
-    init_auth(); 
+    await init_auth(); 
 }
 
 // da dang nhap 
