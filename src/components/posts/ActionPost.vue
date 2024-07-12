@@ -1,7 +1,8 @@
 <script setup>
-import { post_like_api } from '@/services/post';
+import { post_like_api, post_comment_api, post_delete_comment_api } from '@/services/post';
 import { myProfileId } from '@/stores/auth';
 import { ref , computed } from 'vue';
+import CardUser from "@/components/profile/CardUser.vue";
 
 const props = defineProps(["idPost", "likes", "comments"])
 const emits = defineEmits(["updateLikes"])
@@ -29,17 +30,49 @@ const isLiked = computed(() => {
         return false
 })
 
+const inpComment = ref("")
+
+const postComment = async () => {
+    if(inpComment.value && inpComment.value.length < 2000) {
+        try {
+            await post_comment_api(props.idPost, {
+                content: inpComment.value
+            }).then(res => {
+                inpComment.value = ""
+                props.comments.unshift(res)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }else {
+
+    }
+}
+
 </script>
 
 <template>
     <div>
-        <button @click="likePost" class="btn-like" 
-            :class="{'btn-like--highlight': isLiked}"
-        >
-            <span v-if="isLiked">like </span>
-            <span v-else>liked</span>
-            | {{ likesLength }}
-        </button>
+       <div class="action-nav">
+            <button @click="likePost" class="btn-like" 
+                :class="{'btn-like--highlight': isLiked}"
+            >
+                <span v-if="isLiked">like </span>
+                <span v-else>liked</span>
+                | {{ likesLength }}
+            </button>
+
+            <div>
+                <input class="input-comment" type="text" placeholder="enter comment" v-model="inpComment">
+                <button @click="postComment">comment</button>
+            </div>
+       </div>
+       <div class="comments">
+            <div v-for="comment of comments" :key="comment.id">
+                <CardUser :profile_id="comment.profile_id"/>
+                <div>{{ comment.content }}</div>
+            </div>
+       </div>
     </div>
 </template>
 
@@ -50,5 +83,14 @@ const isLiked = computed(() => {
 
 .btn-like--highlight {
     background-color: red;
+}
+
+.action-nav {
+    display: flex;
+    align-items: center;
+}
+
+.input-comment {
+    margin-left: 32px;
 }
 </style>

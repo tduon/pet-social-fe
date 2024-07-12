@@ -2,7 +2,8 @@
 import { computed, onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { post_detail_api } from '@/services/post';
-import ActionPost from '@/components/posts/ActionPost.vue'
+import ActionPost from '@/components/posts/ActionPost.vue';
+import CardUser from "@/components/profile/CardUser.vue";
 
 const route = useRoute();
 const idPost = computed(() => {
@@ -38,6 +39,7 @@ const updateLikes = (likes) => {
       <div v-if="isDoneLoad">
         <div v-if="post">
             <h1>{{post.title}}</h1>
+            <CardUser :profile_id="post.profile_id"/>
             <h2>{{post.content}}</h2>
             <hr>
             <ActionPost 
