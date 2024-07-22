@@ -51,7 +51,13 @@ const toUpdate = () => {
                 <h1>
                     {{profile.name}}
                 </h1>
-                <button v-if="isMyProfile" @click="toUpdate">Update Profile</button>
+                <div v-if="isMyProfile" >
+                    <button @click="toUpdate">Update Profile</button>
+                </div>
+                <div v-else>
+                    <button>Follow</button> -
+                    <button>Chat</button>
+                </div>
                 <hr>
                 <div class="info">
                     <div>
